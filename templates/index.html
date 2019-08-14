@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang = "en-us">
+
+<head> 
+
+    <meta charset = "UTF-8">
+    <title> IMDb Top Rated Movies </title>
+
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <div class = "nav-bar">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="index.html">IMDb Top Rated Movies</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item active">
+
+              <a class="nav-link" href="index.html">Home</a>
+
+            </li>
+
+
+            <li class="nav-item dropdown">
+
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Charts
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                <a class="dropdown-item" href="bubble_chart.html">Bubble</a>
+                <a class="dropdown-item" href="multi_bar_chart.html">Multi Bar</a>
+                <a class="dropdown-item" href="timeline_chart.html">Line</a>
+                <a class="dropdown-item" href="pie_chart.html">Pie</a>
+
+              </div>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link" href = "https://github.com/chienyuanhung/IMDB_top_rated_movies" target = "_blank">Github Page</i></a>
+
+            </li>
+
+          </ul>
+
+        </div>
+
+      </nav>
+
+    </div>
+
+
+
+    <!-- Main Content -->
+
+    <div class = "description" id = "description">
+
+        <div class = "container">
+
+            <div class = "row">
+
+                <!-- Up box  -->
+
+                <div class = "col-md-12">
+
+                    <div class = "box">
+
+                    <h3 class = "title">Welcome to IMDb Project Web Page</h3>
+
+                    <hr>
+
+                    <p>   Hello, my friend. We are welcoming you on IMDb Top Rated Movies Project Web Page
+                        We decided to scrape all data we need with Splinter and Pandas and create 4 beatiful charts to visualize findings and make your life easier.
+                    </p>
+
+                    <p><strong>1) Bubble Chart</strong> - to represent  actors from each movie. Each bubble is actor, Bubble text is name of actor, the size of Bubble will depend on the number of movies from the our list in which the actor was in the movie. On click you will see the names of all movies actor took part.</p>
+                    <p><strong>2) Multiple bar chart</strong> - to visualize comparison of Budget (spent for production) and Profit (how much money movie collected all over the world)...250 is to many to represent, so we will try to show top 10 Budgets and top 10 Profits or something like that</p>
+                    <p><strong>3) Timeline graph</strong> - X is year, Y is quantity of movies were filmed this particular year.</p>
+                    <p><strong>4) Pie chart</strong> - Genres visualization. We will see the ratio of the best movies by genre.</p>
+                    
+
+                </div>
+
+                <!-- Down Box -->
+
+                <div class = "col-lg-12">
+
+                    <div class = "box">
+
+                    <div class = "container">
+
+                        <div class = "row" style = "padding-bottom: 30px;">
+
+                            <div class = "col-md-3 visualization">
+
+                                <a href = "bubble_chart.html">
+                                <img class = "panel" src = "../Images/Fig1.png" alt = "Bubble Chart">
+                                </a>
+                                <p class="text_under_image">Actors in movies</p>
+
+                            </div>
+                            
+
+                            <div class = "col-md-3 visualization">
+
+                                <a href = "multi_bar_chart.html">
+                                <img class = "panel" src = "../Images/Fig2.png" alt = "Multi Bar Chart">
+                                </a>
+                                <p class="text_under_image">Budget/Profit</p>
+
+                            </div>
+                            
+
+                            <div class = "col-md-3 visualization">
+
+                                <a href = "timeline_chart.html">
+                                <img class = "panel" src = "../Images/Fig3.png" alt = "Timeline Chart">
+                                </a>
+                                <p class="text_under_image">Number of movies per year</p>
+
+                            </div>
+                            
+
+                            <div class = "col-md-3 visualization">
+
+                                <a href = "pie_chart.html">
+                                <img class = "panel" src = "../Images/Fig4.png" alt = "Pie Chart">
+                                </a>
+                                <p class="text_under_image">Genres statistic</p>
+
+                            </div>
+                            
+    
+                        </div>
+        
+                    </div>
+                    
+                </div>
+       
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer  -->
+
+    <footer>
+
+        <div class = "footer"><strong>Made with <i class = "fa fa-heart-o"></i> by <a class = "personal_github" href = "https://github.com/chienyuanhung" style="text-decoration:none" target = "_blank">Yuan</i></a>, 
+                                                                                    <a class = "personal_github" href = "https://github.com/Yara1994" style="text-decoration:none" target = "_blank">Nick</i></a>, 
+                                                                                    <a class = "personal_github" href = "https://github.com/ebisevac" style="text-decoration:none" target = "_blank">Erkan</i></a>, 
+                                                                                    <a class = "personal_github" href = "https://github.com/HimaniMakode" style="text-decoration:none" target = "_blank">Himani</i></a>
+                                                                                    <a href = "../top_movies_updated.json" target = "_blank" download>
+
+                                                                                      <button type = "button" class = "btn btn-primary">
+                                                                            
+                                                                                          <i class = "fa fa-download"></i> JSON
+                                                                                      
+                                                                                      </button>
+                                                                            
+                                                                                    </a> </strong></div>
+
+         
+          
+
+    </footer>
+
+</body>
+
+</html>
