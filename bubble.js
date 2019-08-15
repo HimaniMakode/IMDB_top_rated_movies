@@ -12,15 +12,18 @@
     //  console.log(movies)
 
      var actorMovies = new Object()
+     var actorList = []
      for (var j = 0; j<actors.length; j++){
-         if (actors[j] in Object.keys(actorMovies)){
-            actorMovies[actors[j]].push(movies[j])
+         if (actorList.indexOf(actors[j]) == -1) {
+            actorMovies[actors[j]] = [];
+            actorMovies[actors[j]].push(movies[j]);
+            actorList.push(actors[j])    
          }
-         else{
-             actorMovies[actors[j]] = []
-             actorMovies[actors[j]].push(movies[j])
-         }
+         else {
+            actorMovies[actors[j]].push(movies[j])  
+            // console.log(actors[j]) 
+         };
          
      }
-     console.log(actorMovies.keys().length)
+    console.log(actorMovies)
 })
