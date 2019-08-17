@@ -10,21 +10,31 @@ var bubbles = null;
 // read the json file
  
 d3.json("top_movies_updated.json", function(error, data){
-    console.log(data);
+    // var a = data[1].Rating_info.split(" ")
+    // console.log(a[3].replace(/\,/g, ''));
      var actors = []
      var movies = []
+     var rating = []
+     var totalRatNum = []
+     
      data.forEach(function(d){
          for (var i = 0; i<d.Cast_list.length; i++) {
+             a = d.Rating_info.split(" ")
              actors.push(d.Cast_list[i])
              movies.push(d.Title)
+             rating.push(+a[0])
+             totalRatNum.push(+a[3].replace(/\,/g, ''))
          }  
      })
     
+     console.log(rating)
     // create an object with actor as key and movie(s) the actor in as value
     // create an array for actor list 
 
      var actorMovies = new Object()
      var actorList = []
+     var actorGross = new Object()
+     var actorYear = new Object()
      for (var j = 0; j<actors.length; j++){
          if (actorList.indexOf(actors[j]) == -1) {
             actorMovies[actors[j]] = [];
