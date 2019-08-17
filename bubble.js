@@ -7,8 +7,6 @@ var svg = null;
 var bubbles = null;
 
 
-
-
 // read the json file
  
 d3.json("top_movies_updated.json", function(error, data){
@@ -55,7 +53,7 @@ d3.json("top_movies_updated.json", function(error, data){
      
     // console.log(actorThreeMovies)
 
-    // create svg
+   // create svg
 
    var svg = d3.select("#vis").append("svg")
      .attr("width", width)
@@ -63,9 +61,113 @@ d3.json("top_movies_updated.json", function(error, data){
      .append("g")
      .attr("transform", "translate(0,0)")
 
-
+    function floatingTooltip(tooltipId, width) {
+        // Local variable to hold tooltip div for
+        // manipulation in other functions.
+        var tt = d3.select('body')
+          .append('div')
+          .attr('class', 'tooltip')
+          .attr('id', tooltipId)
+          .style('pointer-events', 'none');
+      
+        // Set a width if it is provided.
+        if (width) {
+          tt.style('width', width);
+        }
+      
+        // Initially it is hidden.
+        hideTooltip();
+      
+        /*
+         * Display tooltip with provided content.
+         *
+         * content is expected to be HTML string.
+         *
+         * event is d3.event for positioning.
+         */
+        function showTooltip(content, event) {
+          tt.style('opacity', 1.0)
+            .html(content);
+      
+          updatePosition(event);
+        }
+      
+        /*
+         * Hide the tooltip div.
+         */
+        function hideTooltip() {
+          tt.style('opacity', 0.0);
+        }
+      
+        /*
+         * Figure out where to place the tooltip
+         * based on d3 mouse event.
+         */
+        function updatePosition(event) {
+          var xOffset = 20;
+          var yOffset = 10;
+      
+          var ttw = tt.style('width');
+          var tth = tt.style('height');
+      
+          var wscrY = window.scrollY;
+          var wscrX = window.scrollX;
+      
+          var curX = (document.all) ? event.clientX + wscrX : event.pageX;
+          var curY = (document.all) ? event.clientY + wscrY : event.pageY;
+          var ttleft = ((curX - wscrX + xOffset * 2 + ttw) > window.innerWidth) ?
+                       curX - ttw - xOffset * 2 : curX + xOffset;
+      
+          if (ttleft < wscrX + xOffset) {
+            ttleft = wscrX + xOffset;
+          }
+      
+          var tttop = ((curY - wscrY + yOffset * 2 + tth) > window.innerHeight) ?
+                      curY - tth - yOffset * 2 : curY + yOffset;
+      
+          if (tttop < wscrY + yOffset) {
+            tttop = curY + yOffset;
+          }
+      
+          tt
+            .style("display", "block")
+            .style('top', tttop + 'px')
+            .style('left', ttleft + 'px');
+        }
+      
+        return {
+          showTooltip: showTooltip,
+          hideTooltip: hideTooltip,
+          updatePosition: updatePosition
+        };
+      }
     // set tooltip
     var tooltip = floatingTooltip('gates_tooltip', 240);
+
+    function showDetail(d) {
+        // change outline to indicate hover state.
+        d3.select(this).attr('stroke', 'black');
+    
+        var content = '<span class="name">Actor: </span><span class="value">' +
+                      d.actor +
+                      '</span><br/>' +
+                      '<span class="name">Movie: </span><span class="value">' +
+                      d.movies +
+                      '</span>';
+    
+        tooltip.showTooltip(content, d3.event)
+            .style("left", (d3.mouse(this)[0]+30) + "px")
+            .style("top", (d3.mouse(this)[1]+30) + "px")
+      }
+
+      function hideDetail(d) {
+        // reset outline
+        d3.select(this)
+          .attr('stroke', d3.rgb(fillcolor(d.group)).darker());
+    
+        tooltip.hideTooltip();
+      }
+    
     
     // scale the radius for bubbles
     var maxAmount = d3.max(actorThreeMovies, function(d){return +d.movieNum})
@@ -111,17 +213,6 @@ d3.json("top_movies_updated.json", function(error, data){
 
     console.log(nodes)
 
-    // tooltips
-    var tooltip = d3.select("#vis")
-    .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "black")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("color", "white")
-    
-
    
     //color for bubbles
     var fillcolor = d3.scaleOrdinal()
@@ -145,6 +236,7 @@ d3.json("top_movies_updated.json", function(error, data){
            .attr('stroke-width', 2)
            .on('mouseover', showDetail)
            .on('mouseout', hideDetail);
+           
 
     var labels = elements
            .append("text")
@@ -197,36 +289,9 @@ d3.json("top_movies_updated.json", function(error, data){
     simulation.nodes(nodes)
        .on('tick', ticked)
        .restart();
+    
 
-    /*
-   * Function called on mouseover to display the
-   * details of a bubble in the tooltip.
-   */
-     function showDetail(d) {
-    // change outline to indicate hover state.
-        d3.select(this).attr('stroke', 'black');
-
-        var content = '<span class="name">Actor: </span><span class="value">' +
-                  d.actor +
-                  '</span><br/>' +
-                  '<span class="name">Movies: </span><span class="value">$' +
-                  d.movies +
-                  '</span><br/>';
-
-        tooltip.showTooltip(content, d3.event);
-    }
-
-    /*
-    * Hides tooltip
-    */
-    function hideDetail(d) {
-      // reset outline
-       d3.select(this)
-        .attr('stroke', d3.rgb(fillcolor(d.group)).darker());
-
-      tooltip.hideTooltip();
-    }
-
+    
 
   
 })
