@@ -12,7 +12,7 @@ var bubbles = null;
 // read the json file
  
 d3.json("top_movies_updated.json", function(error, data){
-    //  console.log(data);
+    console.log(data);
      var actors = []
      var movies = []
      data.forEach(function(d){
@@ -53,7 +53,7 @@ d3.json("top_movies_updated.json", function(error, data){
         }
     })
      
-    console.log(actorThreeMovies)
+    // console.log(actorThreeMovies)
 
     // create svg
 
@@ -64,6 +64,9 @@ d3.json("top_movies_updated.json", function(error, data){
      .attr("transform", "translate(0,0)")
 
 
+    // set tooltip
+    var tooltip = floatingTooltip('gates_tooltip', 240);
+    
     // scale the radius for bubbles
     var maxAmount = d3.max(actorThreeMovies, function(d){return +d.movieNum})
 
@@ -108,6 +111,17 @@ d3.json("top_movies_updated.json", function(error, data){
 
     console.log(nodes)
 
+    // tooltips
+    var tooltip = d3.select("#vis")
+    .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+    
+
    
     //color for bubbles
     var fillcolor = d3.scaleOrdinal()
@@ -115,8 +129,6 @@ d3.json("top_movies_updated.json", function(error, data){
       .range(['#42A5B3', '#95A17E', '#E3BA22', '#E6842A', '#E25A42'])
 
     
-
-
     elements = svg.selectAll('.bubble')
           .data(nodes, d => d.actor )
           .enter()
@@ -131,7 +143,8 @@ d3.json("top_movies_updated.json", function(error, data){
            .attr('cy', function (d) { return d.y; })
            .attr('stroke', function(d){return d3.rgb(fillcolor(d.group)).darker();})
            .attr('stroke-width', 2)
-
+           .on('mouseover', showDetail)
+           .on('mouseout', hideDetail);
 
     var labels = elements
            .append("text")
@@ -140,9 +153,12 @@ d3.json("top_movies_updated.json", function(error, data){
            .style('font-size', 10)
            .text(d => d.actor)
 
+
     bubbles.transition()
         .duration(2000)
         .attr('r', function(d){return d.radius})
+        
+    
 
     // constraints for force simulation
     var center = {x: width / 2, y: height / 2};
@@ -164,8 +180,7 @@ d3.json("top_movies_updated.json", function(error, data){
        return -forceStrength * Math.pow(d.radius, 4.0);
     }
 
-
-    
+   
 
     // moving bubble to the new position
     function ticked() {
@@ -182,6 +197,37 @@ d3.json("top_movies_updated.json", function(error, data){
     simulation.nodes(nodes)
        .on('tick', ticked)
        .restart();
+
+    /*
+   * Function called on mouseover to display the
+   * details of a bubble in the tooltip.
+   */
+     function showDetail(d) {
+    // change outline to indicate hover state.
+        d3.select(this).attr('stroke', 'black');
+
+        var content = '<span class="name">Actor: </span><span class="value">' +
+                  d.actor +
+                  '</span><br/>' +
+                  '<span class="name">Movies: </span><span class="value">$' +
+                  d.movies +
+                  '</span><br/>';
+
+        tooltip.showTooltip(content, d3.event);
+    }
+
+    /*
+    * Hides tooltip
+    */
+    function hideDetail(d) {
+      // reset outline
+       d3.select(this)
+        .attr('stroke', d3.rgb(fillcolor(d.group)).darker());
+
+      tooltip.hideTooltip();
+    }
+
+
   
 })
 
