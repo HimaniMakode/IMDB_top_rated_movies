@@ -14,38 +14,46 @@ d3.json("top_movies_updated.json", function(error, data){
     // console.log(a[3].replace(/\,/g, ''));
      var actors = []
      var movies = []
-     var rating = []
-     var totalRatNum = []
+     var ratingSum = []
+     var ratingNum = [] 
+   
      
      data.forEach(function(d){
          for (var i = 0; i<d.Cast_list.length; i++) {
              a = d.Rating_info.split(" ")
+             rating = +a[0]
+             ratNum = +a[3].replace(/\,/g, '')
              actors.push(d.Cast_list[i])
              movies.push(d.Title)
-             rating.push(+a[0])
-             totalRatNum.push(+a[3].replace(/\,/g, ''))
+             ratingSum.push(rating*ratNum)
+             ratingNum.push(ratNum)
          }  
      })
     
-     console.log(rating)
     // create an object with actor as key and movie(s) the actor in as value
     // create an array for actor list 
 
      var actorMovies = new Object()
      var actorList = []
-     var actorGross = new Object()
-     var actorYear = new Object()
+     var actorRatingSum = new Object()
+     var actorRatingNum = new Object()
+    
      for (var j = 0; j<actors.length; j++){
          if (actorList.indexOf(actors[j]) == -1) {
             actorMovies[actors[j]] = [];
             actorMovies[actors[j]].push(movies[j]);
+            actorRatingSum[actors[j]] = [];
+            actorRatingSum[actors[j]].push(ratingSum[j]);
+            actorRatingNum[actors[j]] = [];
+            actorRatingNum[actors[j]].push(ratingNum[j]);
             actorList.push(actors[j])    
          }
          else {
-            actorMovies[actors[j]].push(movies[j])  
-            // console.log(actors[j]) 
+            actorMovies[actors[j]].push(movies[j]); 
+            actorRatingSum[actors[j]].push(ratingSum[j]);
+            actorRatingNum[actors[j]].push(ratingNum[j]);
          };
-         
+        
      }
     
     //create another actor:movie pair Object  with more than 3 movies on the list
@@ -56,12 +64,13 @@ d3.json("top_movies_updated.json", function(error, data){
             aM.actor = actor
             aM.movies = actorMovies[actor]
             aM.movieNum = actorMovies[actor].length
+            aM.rating = (actorRatingSum[actor].reduce((a, b) => a + b, 0))/(actorRatingNum[actor].reduce((a, b) => a + b, 0))
             actorThreeMovies.push(aM)
 
         }
     })
      
-    // console.log(actorThreeMovies)
+    console.log(actorThreeMovies)
 
    // create svg
 
@@ -71,7 +80,8 @@ d3.json("top_movies_updated.json", function(error, data){
      .append("g")
      .attr("transform", "translate(0,0)")
 
-    function floatingTooltip(tooltipId, width) {
+  // tooltip follow circles created by force simulation
+  function floatingTooltip(tooltipId, width) {
         // Local variable to hold tooltip div for
         // manipulation in other functions.
         var tt = d3.select('body')
@@ -163,6 +173,12 @@ d3.json("top_movies_updated.json", function(error, data){
                       '</span><br/>' +
                       '<span class="name">Movie: </span><span class="value">' +
                       d.movies +
+                      '</span><br/>' +
+                      '<span class="name">Num. of Movies: </span><span class="value">' +
+                      d.value +
+                      '</span><br/>' +
+                      '<span class="name">Rating. of Movies: </span><span class="value">' +
+                      d.rating.toFixed(2) +
                       '</span>';
     
         tooltip.showTooltip(content, d3.event)
@@ -187,6 +203,11 @@ d3.json("top_movies_updated.json", function(error, data){
            .domain([3, maxAmount])
            .range([20, 90])
     
+    var ratingScale = d3.scaleLinear()
+            .domain([7.5, 9.5])
+            .range([0, 900])
+
+
     // function for grouping 
     function colorGroup(m){
         if (m ==3){
@@ -213,6 +234,8 @@ d3.json("top_movies_updated.json", function(error, data){
                 movies: d.movies, 
                 radius: radiusScale(+d.movieNum),
                 value: +d.movieNum,
+                rating: +d.rating,
+                ratingPos: ratingScale(+d.rating), 
                 group : colorGroup(+d.movieNum),
                 x: Math.random()*900,
                 y: Math.random()*800
@@ -252,7 +275,8 @@ d3.json("top_movies_updated.json", function(error, data){
            .append("text")
            .attr('dy', '3em')
            .style('text-anchor', 'middle')
-           .style('font-size', 10)
+           .style('font-size', 11)
+           .style('font-family', 'sans-serif')
            .text(d => d.actor)
 
 
@@ -299,8 +323,6 @@ d3.json("top_movies_updated.json", function(error, data){
     simulation.nodes(nodes)
        .on('tick', ticked)
        .restart();
-    
-
     
 
   
