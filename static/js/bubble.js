@@ -1,6 +1,6 @@
 // set width and heigh for svg
-var width = 1100;
-var height = 800;
+var width = 1500;
+var height = 900;
 var svg = null;
 
 // set for bubbles and nodes(circles)
@@ -9,7 +9,7 @@ var bubbles = null;
 
 // read the json file
  
-d3.json("top_movies_updated.json", function(error, data){
+d3.json("data/top_movies_updated.json", function(error, data){
     // var a = data[1].Rating_info.split(" ")
     // console.log(a[3].replace(/\,/g, ''));
      var actors = []
@@ -78,7 +78,14 @@ d3.json("top_movies_updated.json", function(error, data){
      .attr("width", width)
      .attr("height", height)
      .append("g")
+     .attr("class", "graph-svg-component")
      .attr("transform", "translate(0,0)")
+
+     svg.append("rect")
+     .attr("width", "100%")
+     .attr("height", "100%")
+     .attr("fill", "pink");
+
 
   // tooltip follow circles created by force simulation
   function floatingTooltip(tooltipId, width) {
