@@ -212,7 +212,7 @@ d3.json("data/top_movies_updated.json", function(error, data){
     
     var ratingScale = d3.scaleLinear()
             .domain([7.5, 9.5])
-            .range([0, 900])
+            .range([0, 1500])
 
 
     // function for grouping 
@@ -331,7 +331,73 @@ d3.json("data/top_movies_updated.json", function(error, data){
        .on('tick', ticked)
        .restart();
     
+   //switching between two modes, actor-movie and actor-rating
 
+  function movieBubbles() {
+    hideRating()
+    //original simulation
+    simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
+    simulation.force('collision', d3.forceCollide().radius(d => d.radius + 5));
+    simulation.alpha(1).restart();
+  }
+
+  function ratingBubbles() {
+    showRating()
+    //simulation forces in x-axis according to rating
+    simulation.force('x', d3.forceX().strength(forceStrength).x(d => d.ratingPos));
+    simulation.force('collision', d3.forceCollide().radius(d => d.radius + 2));
+    simulation.alpha(4).restart();
+
+  }
+  function hideRating() {
+    svg.selectAll('.rating').remove();
+  }
+  
+  function showRating() {
+    xlabel = [7.8, 8.0, 8.2, 8.4, 8.6, 8.8, 9.0, 9.2]
+
+    ratingLable =  d3.scaleBand()
+    .domain(xlabel)
+    .range([0, 1500])
+
+    var xAxis = d3.axisBottom(ratingLable);
+
+    svg.selectAll('.rating')
+             .attr('class', 'rating')
+             .append('g')
+             .attr("transform", 'translate(0, 40')
+             .call(xAxis);        
+  }
+
+  function toggleDisplay(displayName) {
+    if (displayName === 'rating') {
+      ratingBubbles();
+    } else {
+      movieBubbles();
+    }
+  };
+
+  
+
+
+    d3.select('#toolbar')
+      .selectAll('.button')
+      .on('click', function () {
+        // Remove active class from all buttons
+        d3.selectAll('.button').classed('active', false);
+        // Find the button just clicked
+        var button = d3.select(this);
+  
+        // Set it as the active button
+        button.classed('active', true);
+  
+        // Get the id of the button
+        var buttonId = button.attr('id');
+  
+        // Toggle the bubble chart based on
+        // the currently clicked button.
+        toggleDisplay(buttonId);
+      });
   
 })
 
