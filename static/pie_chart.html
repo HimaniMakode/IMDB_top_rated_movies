@@ -4,6 +4,10 @@
 <head> 
 
     <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+
     <title> IMDb Top Rated Movies - Pie Chart </title>
 
     <link rel = "stylesheet" type = "text/css" href = "css/style.css">
@@ -96,9 +100,13 @@
 
 
 
-                    <div id="pie" class="chart">
+                    <div id="pie" class="chart"  style="height: 700px; width: 100%;">
 
                         <!-- We append our PIE CHART here. -->
+                        <script type="text/javascript" src="data/top_movies_updated.json"></script>
+                        <script type="text/javascript" src="js/piechart.js"></script>
+                     
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
                     </div>
                     
