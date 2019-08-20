@@ -17,6 +17,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="js/bar.js"></script>
     
     
 </head>
@@ -83,7 +86,8 @@
 
     <div class="container">
 
-        <div class="row">
+
+        <!-- <div class="row">
 
             <div class="col-xs-12 col-md-12">
                 
@@ -92,27 +96,44 @@
 
             </div>
 
-        </div>
+        </div> -->
 
         <!-- CHART -->
 
         <div class="row">
 
             <div class="col-md-12">
+              
 
-                    <div id="bar" class="chart">
+              <!-- <div class = "box" style = "width: 1400px; height: 680px; margin-left: -150px"> -->
+
+                    <div id="bar" class="chart-container">
 
                       <!-- We append our MULTI BAR CHART here. -->
 
-                      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                      <script src="js/bar.js"></script>
+                      <canvas id = "barChart" style = "height:850px; width:1200px"></canvas>
+                      <!-- <canvas id = "barChart1" style = "height:850px; width:1200px"></canvas> -->
+                      
 
                     </div>
+                    
+                    <div id="bar" class="chart-container">
+
+                        <!-- We append our MULTI BAR CHART here. -->
+  
+                        <!-- <canvas id = "barChart" style = "height:850px; width:1200px"></canvas> -->
+                        <canvas id = "barChart1" style = "height:850px; width:1200px"></canvas>
+                        
+  
+                      </div>
+
+
+              </div>
 
             </div>
 
         </div>
-
+        
     </div>
 
     <!-- Footer  -->

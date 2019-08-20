@@ -191,6 +191,24 @@ footer{
 
 }
 
+/* CANVAS */
+
+.chart-container {
+
+    padding: 10px; 
+    background-color: rgb(170, 170, 170);
+    border-radius: 30px;
+    border: 1px solid #fff;
+    margin-top: 15px;
+    margin-bottom: 70px
+    /* margin-top: 20px; */
+    /* margin-bottom: 70px */
+    
+
+}
+
+/* DROPDOWN */
+
 
 
 /* Hover */
