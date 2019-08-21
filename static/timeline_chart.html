@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang = "en-us">
+﻿<!DOCTYPE html>
+<html lang="en-us">
 
-<head> 
+<head>
 
-    <meta charset = "UTF-8">
+    <meta charset="UTF-8">
     <title> IMDb Top Rated Movies - Time Line Chart </title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -24,91 +25,87 @@
 
     <!-- Navbar -->
 
-    <div class = "nav-bar">
+    <div class="nav-bar">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        <a class="navbar-brand" href="index.html">IMDb Top Rated Movies</a>
+            <a class="navbar-brand" href="index.html">IMDb Top Rated Movies</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-          <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
 
-            <li class="nav-item active">
+                    <li class="nav-item active">
 
-              <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
 
-            </li>
+                    </li>
 
 
-            <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
 
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Charts
-              </a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Charts
+                        </a>
 
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                <a class="dropdown-item" href="bubble_chart.html">Bubble</a>
-                <a class="dropdown-item" href="multi_bar_chart.html">Multi Bar</a>
-                <a class="dropdown-item" href="timeline_chart.html">Line</a>
-                <a class="dropdown-item" href="pie_chart.html">Pie</a>
+                            <a class="dropdown-item" href="bubble_chart.html">Bubble</a>
+                            <a class="dropdown-item" href="multi_bar_chart.html">Multi Bar</a>
+                            <a class="dropdown-item" href="timeline_chart.html">Line</a>
+                            <a class="dropdown-item" href="pie_chart.html">Pie</a>
 
-              </div>
+                        </div>
 
-            </li>
+                    </li>
 
-            <li class="nav-item">
+                    <li class="nav-item">
 
-                <a class="nav-link" href = "https://github.com/chienyuanhung/IMDB_top_rated_movies" target = "_blank">Github Page</i></a>
+                        <a class="nav-link" href="https://github.com/chienyuanhung/IMDB_top_rated_movies" target="_blank">Github Page</i></a>
 
-            </li>
+                    </li>
 
-          </ul>
+                </ul>
 
-        </div>
+            </div>
 
-      </nav>
+        </nav>
 
     </div>
 
     <!-- Main Content -->
-
     <!-- Title -->
 
     <div class="container">
 
         <!-- <div class="row">
-
             <div class="col-xs-12 col-md-12">
-                
+
                 <br>
                 <h1 class = "chart-title">Time Line Chart</h1>
-
             </div>
-
         </div> -->
-
         <!-- CHART -->
 
         <div class="row">
 
             <div class="col-md-12">
 
-                <div id="line" class = "chart-container">
 
-                    <div id="timeline" class="chart">
 
-                        <!-- We append our TIME LINE CHART here. -->
-                        <canvas id = "lineChart" style = "height:850px; width:1200px"></canvas>
+                <div id="timeline" class="chart">
 
-                    </div>
-                    
+                    <!-- We append our TIME LINE CHART here. -->
+                    <script type="text/javascript" src="data/top_movies_updated.json"></script>
+                    <script type="text/javascript" src="js/Linechart.js"></script>
+
                 </div>
+
+
 
             </div>
 
@@ -120,19 +117,23 @@
 
     <footer>
 
-        <div class = "footer"><strong>Made with <i class = "fa fa-heart-o"></i> by <a class = "personal_github" href = "https://github.com/chienyuanhung" style="text-decoration:none" target = "_blank">Yuan</i></a>, 
-                                                                                    <a class = "personal_github" href = "https://github.com/Yara1994?tab=repositories" style="text-decoration:none" target = "_blank">Nick</i></a>, 
-                                                                                    <a class = "personal_github" href = "https://github.com/ebisevac" style="text-decoration:none" target = "_blank">Erkan</i></a>, 
-                                                                                    <a class = "personal_github" href = "https://github.com/HimaniMakode" style="text-decoration:none" target = "_blank">Himani</i></a>
-                                                                                    <a href = "data/top_movies_updated.json" target = "_blank" download>
+        <div class="footer">
+            <strong>
+                Made with <i class="fa fa-heart-o"></i> by <a class="personal_github" href="https://github.com/chienyuanhung" style="text-decoration:none" target="_blank">Yuan</i></a>,
+                <a class="personal_github" href="https://github.com/Yara1994?tab=repositories" style="text-decoration:none" target="_blank">Nick</i></a>,
+                <a class="personal_github" href="https://github.com/ebisevac" style="text-decoration:none" target="_blank">Erkan</i></a>,
+                <a class="personal_github" href="https://github.com/HimaniMakode" style="text-decoration:none" target="_blank">Himani</i></a>
+                <a href="data/top_movies_updated.json" target="_blank" download>
 
-                                                                                      <button type = "button" class = "btn btn-primary">
-                                                                            
-                                                                                          <i class = "fa fa-download"></i> JSON
-                                                                                      
-                                                                                      </button>
-                                                                            
-                                                                                    </a></strong></div>
+                    <button type="button" class="btn btn-primary">
+
+                        <i class="fa fa-download"></i> JSON
+
+                    </button>
+
+                </a>
+            </strong>
+        </div>
 
     </footer>
 
