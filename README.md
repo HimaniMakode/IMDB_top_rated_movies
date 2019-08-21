@@ -18,7 +18,7 @@ The index chart contains the explanation of the project with drop down menus and
 ![index](index.png)
 
 The bubble chart is representing the actors that played the role in the movies and bigger bubble presents that he played in multiple movies.
-![Bubble](Bubble.png)
+![Bubble](bubble.png)
 
 The bar chart shows the budget, profit and percent profit for each movie.
 ![Bar1](Bar1.png)
