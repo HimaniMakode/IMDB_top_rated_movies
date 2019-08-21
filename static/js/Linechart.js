@@ -179,7 +179,8 @@ function makeResponsive() {
 
 
         // Step 1: Append a div to the body to create tooltips, assign it a class
-        // =======================================================
+        // ======================================================
+        
         var toolTip = d3.select("body").append("div")
             .attr("class", "tooltip");
 
