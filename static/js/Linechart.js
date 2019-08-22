@@ -2,14 +2,17 @@
 // that automatically resizes the chart
 function makeResponsive() {
 
+
     // if the SVG area isn't empty when the browser loads, remove it
     // and replace it with a resized version of the chart
     var svgArea = d3.select("body").select("svg");
     if (!svgArea.empty()) {
         svgArea.remove();
     }
+
+    
     // Define SVG area dimensions
-    var svgWidth = 960;
+    var svgWidth = 1050;
     var svgHeight = 500;
 
     // Define the chart's margins as an object
@@ -32,18 +35,27 @@ function makeResponsive() {
         .select("body")
         .append("svg")
         .attr("width", svgWidth)
-        .attr("height", svgHeight);
+        .attr("height", svgHeight)
+
+        svg.append("rect")
+        .attr("x", 40)
+        .attr("y", 50)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "white");
+
+        
 
     // Append a group area, then set its margins
     var chartGroup = svg
         .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        .attr("transform", `translate(100, 60)`);
     // Configure a parseTime function which will return a new Date object from a string
 
     var parseTime = d3.timeParse("%Y");
     // Load data from top_movies_updated.json
 
-    d3.json("top_movies_updated.json", function (error, MoviesData) {
+    d3.json("data/top_movies_updated.json", function (error, MoviesData) {
         // Throw an error if one occurs
         if (error) throw error;
         // Print the MoviesData
@@ -167,7 +179,8 @@ function makeResponsive() {
 
 
         // Step 1: Append a div to the body to create tooltips, assign it a class
-        // =======================================================
+        // ======================================================
+        
         var toolTip = d3.select("body").append("div")
             .attr("class", "tooltip");
 
