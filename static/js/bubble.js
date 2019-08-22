@@ -12,11 +12,25 @@ var bubbles = null;
 d3.json("data/top_movies_updated.json", function(error, data){
     // var a = data[1].Rating_info.split(" ")
     // console.log(a[3].replace(/\,/g, ''));
-     var actors = []
-     var movies = []
-     var ratingSum = []
-     var ratingNum = [] 
-   
+     var actors = [];
+     var movies = [];
+     var ratingSum = [];
+     var ratingNum = [];
+     var everyRatSum = 0;
+     var everyNum = 0;
+     var aveRating 
+
+     
+     data.forEach(function(d){
+         a = d.Rating_info.split(" ")
+         rating = +a[0]
+         ratNum = +a[3].replace(/\,/g, '')
+         everyRatSum += rating*ratNum;
+         everyNum += ratNum;
+         aveRating = everyRatSum/everyNum
+     })
+
+     console.log(aveRating)
      
      data.forEach(function(d){
          for (var i = 0; i<d.Cast_list.length; i++) {
@@ -84,8 +98,25 @@ d3.json("data/top_movies_updated.json", function(error, data){
      svg.append("rect")
      .attr("width", "100%")
      .attr("height", "100%")
-     .attr("fill", "pink");
+     .attr("fill", "pink")
+     
 
+     var textLabels1 = svg.append('text')
+          .attr("x", 70)
+          .attr("y", 80)
+          .text(`Total Actors: ${actorList.length}`)
+          .attr("font-family", "sans-serif")
+          .attr("font-size", "20px")
+          .attr("fill", "green");
+
+    var textLabels2 = svg.append('text')
+          .attr("x", 70)
+          .attr("y", 110)
+          .text(`Actor with three Movies: ${actorThreeMovies.length}`)
+          .attr("font-family", "sans-serif")
+          .attr("font-size", "20px")
+          .attr("fill", "green");
+    
 
   // tooltip follow circles created by force simulation
   function floatingTooltip(tooltipId, width) {
@@ -274,6 +305,7 @@ d3.json("data/top_movies_updated.json", function(error, data){
            .attr('cy', function (d) { return d.y; })
            .attr('stroke', function(d){return d3.rgb(fillcolor(d.group)).darker();})
            .attr('stroke-width', 2)
+           .attr('opacity', 0.8)
            .on('mouseover', showDetail)
            .on('mouseout', hideDetail);
            
@@ -354,19 +386,26 @@ d3.json("data/top_movies_updated.json", function(error, data){
   }
   
   function showRating() {
-    xlabel = [7.8, 8.0, 8.2, 8.4, 8.6, 8.8, 9.0, 9.2]
 
-    ratingLable =  d3.scaleBand()
-    .domain(xlabel)
-    .range([0, 1500])
-
-    var xAxis = d3.axisBottom(ratingLable);
-
-    svg.selectAll('.rating')
+    var text1 = svg.append('text')
              .attr('class', 'rating')
-             .append('g')
-             .attr("transform", 'translate(0, 40')
-             .call(xAxis);        
+             .attr('x', ratingScale(aveRating))
+             .attr('y', 80)
+             .attr('text-anchor', 'middle')
+             .text('Average rating: ')
+             .attr("font-family", "sans-serif")
+             .attr("font-size", "20px")
+             .attr("fill", "red");
+
+    var text2 = svg.append('text')
+             .attr('class', 'rating')
+             .attr('x', ratingScale(aveRating))
+             .attr('y', 110)
+             .attr('text-anchor', 'middle')
+             .text(aveRating.toFixed(2))
+             .attr("font-family", "sans-serif")
+             .attr("font-size", "20px")
+             .attr("fill", "red");
   }
 
   function toggleDisplay(displayName) {
