@@ -50,10 +50,10 @@
 
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                <a class="dropdown-item" href="bubble_chart.html">Bubble</a>
-                <a class="dropdown-item" href="multi_bar_chart.html">Multi Bar</a>
-                <a class="dropdown-item" href="timeline_chart.html">Line</a>
-                <a class="dropdown-item" href="pie_chart.html">Pie</a>
+                <a class="dropdown-item" href="bubble_chart.html">Actors in movies</a>
+                <a class="dropdown-item" href="multi_bar_chart.html">Budget/Profit</a>
+                <a class="dropdown-item" href="timeline_chart.html">Top rated movies per year</a>
+                <a class="dropdown-item" href="pie_chart.html">Genres statistic</a>
 
               </div>
 
@@ -93,14 +93,14 @@
 
                     <hr>
 
-                    <p>   Hello, my friend. We are welcoming you on IMDb Top Rated Movies Project Web Page
+                    <p>   Hello, my friend. We are welcoming you on our IMDb Top Rated Movies Project Web Page.
                         We decided to scrape all data we need with Splinter and Pandas and create 4 beatiful charts to visualize findings and make your life easier.
                     </p>
 
-                    <p><strong>1) Bubble Chart</strong> - to represent  actors from each movie. Each bubble is actor, Bubble text is name of actor, the size of Bubble will depend on the number of movies from the our list in which the actor was in the movie. On click you will see the names of all movies actor took part.</p>
-                    <p><strong>2) Multiple bar chart</strong> - to visualize comparison of Budget (spent for production) and Profit (how much money movie collected all over the world)...250 is to many to represent, so we will try to show top 10 Budgets and top 10 Profits or something like that</p>
+                    <p><strong>1) Bubble Chart</strong> - representation of actors from each movie. Each bubble is actor, Bubble text is name of actor, the size of Bubble will depend on the number of movies from the our list in which the actor was in the movie. On click you will see the names of all movies actor took part.</p>
+                    <p><strong>2) Multiple bar chart</strong> - visualization comparison of Budget (spent for production) and Profit (how much money movie collected all over the world)...250 is to many to represent, so we will try to show top 10 Budgets and top 10 Profits or something like that</p>
                     <p><strong>3) Timeline graph</strong> - X is year, Y is quantity of movies were filmed this particular year.</p>
-                    <p><strong>4) Pie chart</strong> - Genres visualization. We will see the ratio of the best movies by genre.</p>
+                    <p><strong>4) Pie chart</strong> - visualization of genres. We will see the ratio of the best movies by genre.</p>
                     
 
                 </div>
@@ -109,7 +109,7 @@
 
                 <div class = "col-lg-12">
 
-                    <div class = "box">
+                    <div class = "box" style = "padding: 10px">
 
                     <div class = "container">
 
@@ -140,7 +140,7 @@
                                 <a href = "timeline_chart.html">
                                 <img class = "panel" src = "Images/Fig3.png" alt = "Timeline Chart">
                                 </a>
-                                <p class="text_under_image">Number of movies per year</p>
+                                <p class="text_under_image">Top rated movies per year</p>
 
                             </div>
                             
@@ -175,6 +175,8 @@
                                                                                     <a class = "personal_github" href = "https://github.com/Yara1994" style="text-decoration:none" target = "_blank">Nick</i></a>, 
                                                                                     <a class = "personal_github" href = "https://github.com/ebisevac" style="text-decoration:none" target = "_blank">Erkan</i></a>, 
                                                                                     <a class = "personal_github" href = "https://github.com/HimaniMakode" style="text-decoration:none" target = "_blank">Himani</i></a>
+                                                                                    
+                                                                                    <a class="btn btn-primary" href="/scrape", role="button">Scrape New Data</a>
                                                                                     <a href = "data/top_movies_updated.json" target = "_blank" download>
 
                                                                                       <button type = "button" class = "btn btn-primary">
@@ -182,7 +184,7 @@
                                                                                           <i class = "fa fa-download"></i> JSON
                                                                                       
                                                                                       </button>
-                                                                                      <p><a class="btn btn-primary btn-lg" href="/scrape", role="button">Scrape New Data</a> </p>
+                                                                                      
                                                                             
                                                                                     </a> </strong></div>
 

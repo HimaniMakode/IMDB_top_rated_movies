@@ -101,7 +101,6 @@ p{
 
     border-radius: 25px;
     
-
 }
 
 /* Text Under Images */
@@ -125,7 +124,7 @@ footer{
     min-height: 40px; 
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px; 
-    text-align: center; 
+    text-align: left; 
     position: fixed;
     left: 0;
     bottom: 0;
@@ -134,6 +133,7 @@ footer{
     border-top-style: solid; 
     border-top-width: 1px; 
     border-top-color: #fff;
+
 
 }
 
